@@ -9,9 +9,9 @@
 
 ### Soal 1
 
-**Sebutkan webserver yang digunakan pada "testing.mekanis.me"**\
+**Sebutkan webserver yang digunakan pada "testing.mekanis.me"**
 
-Dengan menggunakan display filter `http.host == "testing.mekanis.me"`, akan terlihat paket-paket data yang berasal/menuju dari web testing.mekanis.me. Pilih salah satu paket data dan follow TCP stream-nya untuk melihat atribut web.\
+Dengan menggunakan display filter `http.host == "testing.mekanis.me"`, akan terlihat paket-paket data yang berasal/menuju dari web testing.mekanis.me. Pilih salah satu paket data dan follow TCP stream-nya untuk melihat atribut web.
 
 <img  src="Img/soal1-1.PNG"  width="600px">
 
@@ -27,9 +27,9 @@ Di TCP stream, terlihat bahwa webserver yang digunakan website ini adalah nginx.
 
 ### Soal 2
 
-**Simpan gambar "Tim_Kunjungan_Kerja_BAKN_DPR_RI_ke_Sukabumi141436.jpg"!**\
+**Simpan gambar "Tim_Kunjungan_Kerja_BAKN_DPR_RI_ke_Sukabumi141436.jpg"!**
 
-Tanpa menggunakan display filter, pilih menu File > Export Objects > HTTP dan ketikkan nama file di kolom Text Filter. Kemudian klik file dan Save.\
+Tanpa menggunakan display filter, pilih menu File > Export Objects > HTTP dan ketikkan nama file di kolom Text Filter. Kemudian klik file dan Save.
 
 <img  src="Img/soal-2.PNG"  width="600px">
 
@@ -37,9 +37,9 @@ Tanpa menggunakan display filter, pilih menu File > Export Objects > HTTP dan ke
 
 ### Soal 3
 
-**Cari username dan password ketika login di "ppid.dpr.go.id"!**\
+**Cari username dan password ketika login di "ppid.dpr.go.id"!**
 
-Gunakan display filter `http.host == "ppid.dor.go.id" && http.request.uri contains "login" && http.request.method == POST`. Kemudian di kolom tracing HTML Form terdapat informasi username dan password yang di-submit.\
+Gunakan display filter `http.host == "ppid.dor.go.id" && http.request.uri contains "login" && http.request.method == POST`. Kemudian di kolom tracing HTML Form terdapat informasi username dan password yang di-submit.
 
 <img  src="Img/soal3.PNG"  width="600px">
 
@@ -81,23 +81,23 @@ Hal pertama yang harus dilakukan adalah mencari file answer.zip dan zipkey.txt, 
 
 yang pertama adalah mencari Answer.zip menggunakan ftp-data.command contains "Answer.zip", lalu keluar file yang dicari seperti gambar dibawah:
 
-<img  src="Img/soal6-1.PNG"  width="600px">
+<img  src="Img/soal6-1.png"  width="600px">
 
 Untuk menyimpan file, klik kanan pada Answer.zip lalu follow tcp stream. Save data as raw dan ganti extension file tersebut sesuai dengan extension aslinya.
 
-<img  src="Img/soal6-2.PNG"  width="600px">
+<img  src="Img/soal6-2.png"  width="600px">
 
 Untuk mencari password dari Answer.zip, kita perlu mencari zipkey.txt. kita menggunakan ftp-data.command contains "zipkey.txt", lalu follow tcp stream. 
 
-<img  src="Img/soal6-3.PNG"  width="600px">
+<img  src="Img/soal6-3.png"  width="600px">
 
 Karena file zipkey mempunyai extension txt, maka kita bisa langsung melihat isi dari file tersebut yang berupa password.
 
-<img  src="Img/soal6-4.PNG"  width="600px">
+<img  src="Img/soal6-4.png"  width="600px">
 
 Setelah mendapat Answer.zip dan passwordnya, kita extract zip tersebut lalu didapatkan file Open this.pdf yang dicari.
 
-<img  src="Img/soal6-5.PNG"  width="600px">
+<img  src="Img/soal6-5.png"  width="600px">
 
 > `ftp-data.command contains "X"` akan menampilkan paket-paket data dengan protokol FTP-DATA yang memiliki file X.
 
@@ -107,11 +107,11 @@ Setelah mendapat Answer.zip dan passwordnya, kita extract zip tersebut lalu dida
 
 Untuk mencari zip yang berisi Yes.pdf dapat digunakan perintah display filter "ftp-data contains "Yes.pdf"", maka ditemukan zip yang berisi Yes.pdf yaitu 473.zip.
 
-<img  src="Img/soal7-1.PNG"  width="600px">
+<img  src="Img/soal7-1.png"  width="600px">
 
 Setelah itu follow tcp stream dan simpan file seperti yang sudah dilakukan pada soal nomor 6, lalu kita dapat melihat isi dali Yes.pdf yang berisi puisi.
 
-<img  src="Img/soal7-2.PNG"  width="600px">
+<img  src="Img/soal7-2.png"  width="600px">
 
 > `ftp-data contains "X"` akan menampilkan paket-paket data yang memiliki file X.
 
@@ -122,11 +122,11 @@ Setelah itu follow tcp stream dan simpan file seperti yang sudah dilakukan pada 
 
 Untuk mencari objek yang didownload dengan Microsoft FTP Service, hal pertama yang dilakukan adalah mencari ip yang digunakan Microsoft FTP Service menggunakan perintah display filter "ftp contains "Microsoft FTP Service"".
 
-<img  src="Img/soal8-1.PNG"  width="600px">
+<img  src="Img/soal8-1.png"  width="600px">
 
 Setelah didapat ip dari Microsoft FTP Service, kita cari file RETR yang menggunakan Microsoft FTP Service dengan perintah display filter "ftp.request.command contains "RETR" && ip.addr == 198.246.117.106"
 
-<img  src="Img/soal8-2.PNG"  width="600px">
+<img  src="Img/soal8-2.png"  width="600px">
 
 > `ftp contains "X"` akan menampilkan paket-paket data yang memiliki data X.
 > `ftp.request.command contains "X"` akan menampilkan paket-paket data yang memiliki command X.
@@ -139,7 +139,7 @@ Setelah didapat ip dari Microsoft FTP Service, kita cari file RETR yang mengguna
 
 Untuk mencari username dan password saat login FTP pada localhost, dapat digunakan perintah display filter "ftp.request.command == USER || ftp.request.command == PASS".
 
-<img  src="Img/soal9.PNG"  width="600px">
+<img  src="Img/soal9.png"  width="600px">
 
 > `ftp.request.command == "X"` akan menampilkan paket-paket dengan protokol FTP yang memiliki X.
 
@@ -149,11 +149,11 @@ Untuk mencari username dan password saat login FTP pada localhost, dapat digunak
 
 Untuk mencari file.pdf, dapat digunakan perintah display filter "frame contains ".pdf". Selanjutnya, gunakan find package untuk mencari file.pdf dengan menggunakan clue. Masukan clue dan cari berdasarkan hex value.
 
-<img  src="Img/soal10-1.PNG"  width="600px">
+<img  src="Img/soal10-1.png"  width="600px">
 
 Setelah itu follow tcp stream dan save seperti langkah pada nomor 6 dan 7, file pdf yang dicari merupakan file pdf yang berisi undang-undang Republik Indonesia.
 
-<img  src="Img/soal10-2.PNG"  width="600px">
+<img  src="Img/soal10-2.png"  width="600px">
   
   > `ftp contains "X"` akan menampilkan paket-paket data yang memiliki data X.
 
