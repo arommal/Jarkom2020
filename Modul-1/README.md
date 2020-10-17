@@ -129,7 +129,9 @@ Setelah didapat ip dari Microsoft FTP Service, kita cari file RETR yang mengguna
 <img  src="Img/soal8-2.png"  width="600px">
 
 > `ftp contains "X"` akan menampilkan paket-paket data yang memiliki data X.
+
 > `ftp.request.command contains "X"` akan menampilkan paket-paket data yang memiliki command X.
+
 > `ip.addr == X` akan menampilkan paket-paket yang memiliki ip address X.
   
 
