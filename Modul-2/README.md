@@ -297,7 +297,7 @@ Struktur folder :
 
 **Pada Browser**
 
- - Akses alamat `penanjakan.semerud07.pw/js`, maka akan diarahkan ke `penanjakan.semerud07.pw/public/javascripts/` :
+ - Akses alamat `penanjakan.semerue06.pw/js`, maka akan diarahkan ke `penanjakan.semerue06.pw/public/javascripts/` :
  
     <img  src="Img/soal13-2.png"  width="600px">
   
