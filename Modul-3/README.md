@@ -384,3 +384,38 @@
   <img src="Img/soal11_show.PNG" width="600px">
 
 ## Soal 12
+
+**Setup DNS**
+
+- Install bind9 di MALANG
+- Setup konfigurasi domain janganlupa-ta.e06.pw
+  ```
+  nano /etc/bind/named.conf.local
+  ```
+  Isi dengan:
+  ```
+  zone "janganlupa-ta.e06.pw" {
+    type master;
+    file "/etc/bind/jarkom/janganlupa-ta.e06.pw";
+  }
+  ```
+  
+- Buat folder /etc/bind/jarkom
+  ```
+  mkdir /etc/bind/jarkom
+  cp /etc/bind/db.local /etc/bind/jarkom/janganlupa-ta.e06.pw
+  ```
+  
+- Edit konfigurasi bind untuk domain janganlupa-ta.e06.pw
+  ```
+  nano /etc/bind/jarkom/janganlupa-ta.e06.pw
+  ```
+  Isi dengan:
+  
+  <img src="Img/soal12_2.PNG" width="600px">
+  
+- Ubah HTTP Proxy di browser menjadi seperti berikut (IP MOJOKERTO diganti dengan janganlupa-ta.e06.pw)
+  <img src="Img/soal12_3.PNG" width="600px">
+  
+- Browser dapat mengakses internet dengan HTTP Proxy yang sudah diubah
+  <img src="Img/soal12_4.PNG" width="600px">
