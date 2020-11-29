@@ -418,4 +418,4 @@
   <img src="Img/soal12_3.PNG" width="600px">
   
 - Browser dapat mengakses internet dengan HTTP Proxy yang sudah diubah
-  <img src="Img/soal12_4.PNG" width="600px">
+  <img src="Img/soal12_4.png" width="600px">
