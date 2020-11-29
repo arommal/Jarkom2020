@@ -369,9 +369,11 @@
 
 - Mendownload page ke directory error template dan extract isinya
   ```
-  cd /usr/share/squid/errors
-  wget 10.151.36.202/error403.tar.gz
-  tar -xvf error403.tar.gz
+  cd /usr/share/squid/errors/English
+
+  rm ERR_ACCESS_DENIED
+
+  wget 10.151.36.202/ERR_ACCESS_DENIED
   ```
 - Meng-copy isi /usr/share/squid/errors/template ke /usr/share/squid/errors/error403
   ```
@@ -393,8 +395,7 @@
   ```
 - Menambah konfigurasi squid
   ```
-  error_directory /usr/share/squid/errors/error403/
-  icon_directory /usr/share/squid/icons/
+  error_directory /usr/share/squid/errors/English
   ```
   
   <img src="Img/soal11_show.PNG" width="600px">
