@@ -2,6 +2,161 @@
 
 ## Soal 1
 
+**Membuat topologi berdasarkan gambar dibawah**
+
+  <img src="Img/topologi.png" width="600px">
+
+- Membuat switch
+  ```
+  # Switch
+  uml_switch -unix switch1 > /dev/null < /dev/null &
+  uml_switch -unix switch2 > /dev/null < /dev/null &
+  uml_switch -unix switch3 > /dev/null < /dev/null &
+  ```
+
+- Menjadikan SURABAYA sebagai router
+  ```
+  # Router
+  xterm -T SURABAYA -e linux ubd0=SURABAYA,jarkom umid=SURABAYA eth0=tuntap,,,10.151.70.29 eth1=daemon,,,switch1 eth2=daemon,,,switch3 eth3=daemon,,,switch2 mem=256M &
+  ```
+- Menjadikan MALANG, MOJOKERTO, dan TUBAN sebagai server
+  ```
+  # Server
+  xterm -T MALANG -e linux ubd0=MALANG,jarkom umid=MALANG eth0=daemon,,,switch2 mem=160M &
+  xterm -T MOJOKERTO -e linux ubd0=MOJOKERTO,jarkom umid=MOJOKERTO eth0=daemon,,,switch2 mem=128M &
+  xterm -T TUBAN -e linux ubd0=TUBAN,jarkom umid=TUBAN eth0=daemon,,,switch2 mem=128M &
+  ```
+- Menjadikan GRESIK,SIDOARJO,BANYUWANGI, dan MADIUN sebagai client
+  ```
+  # Klien
+  xterm -T SIDOARJO -e linux ubd0=SIDOARJO,jarkom umid=SIDOARJO eth0=daemon,,,switch1 mem=64M &
+  xterm -T GRESIK -e linux ubd0=GRESIK,jarkom umid=GRESIK eth0=daemon,,,switch1 mem=64M &
+  xterm -T BANYUWANGI -e linux ubd0=BANYUWANGI,jarkom umid=BANYUWANGI eth0=daemon,,,switch1 mem=64M &
+  xterm -T MADIUN -e linux ubd0=MADIUN,jarkom umid=MADIUN eth0=daemon,,,switch1 mem=64M &
+  ```
+- Masukan semua sintaks diatas kedalam topologi.sh dengan menggunakan perintah nano ```topologi.sh```
+  
+  <img src="Img/soal1-1.png" width="600px">
+
+- Bash topologi.sh dan lakukan setting sysctl pada SURABAYA 
+
+  Jalankan perintah ```nano /etc/sysctl.conf```, hilangkan tanda pagar pada ```net.ipv4.    ip_forward=1```.
+
+  <img src="Img/soal1-2.png" width="600px">
+
+  Jalankan perintah ```sysctl -p``` untuk mengaktifkan perubahan.
+
+  <img src="Img/soal1-3.png" width="600px">
+
+- Atur interfaces pada setiap uml
+
+  **UML SURABAYA**
+  ```
+  auto lo
+  iface lo inet loopback
+
+  auto eth0
+  iface eth0 inet static
+  address 10.151.70.30
+  netmask 255.255.255.252
+  gateway 10.151.70.29
+
+  auto eth1
+  iface eth1 inet static
+  address 192.168.0.1
+  netmask 255.255.255.248
+
+  auto eth2
+  iface eth2 inet static
+  address 192.168.1.1
+  netmask 255.255.255.0
+
+  auto eth3
+  iface eth3 inet static
+  address 10.151.71.57
+  netmask 255.255.255.0
+  ```
+  <img src="Img/soal1-4.png" width="600px">
+
+  **UML TUBAN**
+  ```
+  auto lo
+  iface lo inet loopback
+
+  auto eth0
+  iface eth0 inet static
+  address 10.151.71.60
+  netmask 255.255.255.248
+  gateway 10.151.71.57
+  ```
+  <img src="Img/soal1-5.png" width="600px">
+
+  **UML MOJOKERTO**
+  ```
+  auto lo
+  iface lo inet loopback
+
+  auto eth0
+  iface eth0 inet static
+  address 10.151.71.59
+  netmask 255.255.255.248
+  gateway 10.151.71.57
+  ```
+  <img src="Img/soal1-6.png" width="600px">
+
+  **UML MALANG**
+  ```
+  auto lo
+  iface lo inet loopback
+
+  auto eth0
+  iface eth0 inet static
+  address 10.151.71.58
+  netmask 255.255.255.248
+  gateway 10.151.71.57
+  ```
+  <img src="Img/soal1-7.png" width="600px">
+
+  **UML GRESIK**
+  ```
+  auto lo
+  iface lo inet loopback
+
+  auto eth0
+  iface eth0 inet dhcp
+  ```
+  <img src="Img/soal1-8.png" width="600px">
+
+  **UML SIDOARJO**
+  ```
+  auto lo
+  iface lo inet loopback
+
+  auto eth0
+  iface eth0 inet dhcp
+  ```
+  <img src="Img/soal1-9.png" width="600px">
+
+  **UML BANYUWANGI**
+  ```
+  auto lo
+  iface lo inet loopback
+
+  auto eth0
+  iface eth0 inet dhcp
+  ```
+  <img src="Img/soal1-10.png" width="600px">
+
+  **UML MADIUN**
+  ```
+  auto lo
+  iface lo inet loopback
+
+  auto eth0
+  iface eth0 inet dhcp
+  ```
+  <img src="Img/soal1-11.png" width="600px">
+  
 ## Soal 2
 
 ## Soal 3
