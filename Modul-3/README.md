@@ -199,7 +199,7 @@
 
 ## Soal 3
 
-**Meminjamkan IP kepaada subnet 1 dengan range IP dari 192.168.0.10 sampai 192.168.0.100 dan 192.168.0.110 sampai 192.168.0.200**
+**Meminjamkan IP kepada subnet 1 dengan range IP dari 192.168.0.10 sampai 192.168.0.100 dan 192.168.0.110 sampai 192.168.0.200**
 
 - Lakukan pengaturan ```dhcpd.conf``` pada TUBAN dengan menggunakan perintah ```nano /etc/dhcp/dhcpd.conf```, tambahkan script dibawah ini
 
@@ -226,7 +226,7 @@
 
 ## Soal 4
 
-**Meminjamkan IP kepaada subnet 3 dengan range IP dari 192.168.1.50 sampai 192.168.1.70**
+**Meminjamkan IP kepada subnet 3 dengan range IP dari 192.168.1.50 sampai 192.168.1.70**
 
 - Lakukan pengaturan ```dhcpd.conf``` pada TUBAN dengan menggunakan perintah ```nano /etc/dhcp/dhcpd.conf```, tambahkan script dibawah ini
 
@@ -258,7 +258,7 @@
 
   <img src="Img/soal5-1.png" width="600px">
 
-- Lakukan pengecekan pada setiap uml menggunakan perintah ```cat /etc/resolv.conf``` untuk memastikan DNS Malang dan DNS 202.46.129.2 dari DHCP sudah diterima
+- Restart service ```isc-dhcp-server``` menggunakan perintah ```service isc-dhcp-server restart```, lalu lakukan pengecekan pada setiap uml menggunakan perintah ```cat /etc/resolv.conf``` untuk memastikan DNS Malang dan DNS 202.46.129.2 dari DHCP sudah diterima
 
   **UML GRESIK**
 
@@ -280,11 +280,11 @@
 
 **Mengatur waktu peminjaman IP, client di subnet 1 mendapatkan peminjaman alamat IP selama 5 menit, sedangkan client pada subnet 3 mendapatkan peminjaman IP selama 10 menit**
 
-- Lakukan pengaturan ```dhcpd.conf``` pada TUBAN dengan menggunakan perintah ```nano /etc/dhcp/dhcpd.conf```, ubah lease-time pada subnet 1 menjadi 300 dan lease-time pada subnet 3 menjadi 600
+- Lakukan pengaturan ```dhcpd.conf``` pada TUBAN dengan menggunakan perintah ```nano /etc/dhcp/dhcpd.conf```, ubah lease-time pada subnet 1 menjadi 300 dan lease-time pada subnet 3 menjadi 600 (waktu dikonversikan menjadi detik)
 
   <img src="Img/soal6-1.png" width="600px">
 
-- Lease-time menggunakan satuan waktu detik, oleh karena itu kita mengkonversi menit menjadi detik.
+- Restart service ```isc-dhcp-server``` menggunakan perintah ```service isc-dhcp-server restart```.
 
 ## Soal 7
 
