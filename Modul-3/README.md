@@ -156,16 +156,135 @@
   iface eth0 inet dhcp
   ```
   <img src="Img/soal1-11.png" width="600px">
+
+- Lakukan perintah ```service networking restart``` dan lakukan iptables dengan menjalankan perintah ```iptables –t nat –A POSTROUTING –o eth0 –j MASQUERADE –s 192.168.0.0/16``` pada UML SURABAYA
   
 ## Soal 2
 
+**Membuat SURABAYA sebagai DHCP Relay**
+
+- TUBAN digunakan sebagai DHCP Server, maka lakukan install DHCP di TUBAN dengan menggunakan perintah ```apt-get install isc-dhcp-server```, jangan lupa lakukan ```apt-get update``` sebelum menginstall sesuatu
+
+- Lakukan pengatturan pada DHCP Server menggunakan perintah ```nano /etc/default/isc-dhcp-server```, masukan ```eth0`` pada interfaces
+
+  <img src="Img/soal2-1.png" width="600px">
+
+- SURABAYA digunakan sebagai DHCP Relay, maka lakukan install DHCP Relay di SURABAYA dengan menggunakan perintah ```apt-get install isc-dhcp-relay```, jangan lupa lakukan ```apt-get update``` sebelum menginstall sesuatu
+
+- Lakukan pengatturan pada DHCP Relay menggunakan perintah ```nano /etc/default/isc-dhcp-relay```, masukan IP TUBAN pada Servers dan ```eth1 eth2 eth3`` pada interfaces.
+
+  <img src="Img/soal2-2.png" width="600px">
+
+- Kembali ke TUBAN, lakukan pengaturan pada ```dhcpd.conf``` dengan menggunakan perintah ```nano /etc/dhcp/dhcpd.conf```, tambahkan NID_DMZ dan masukan IP SURABAYA sebagai option routers agar dhcp relay bisa berjalan
+
+  <img src="Img/soal2-3.png" width="600px">
+
+- Ubah interfaces pada klien menjadi dhcp jika interfaces pada klien masih static, jangan lupa lakukan ```service networking restart``` setelah mengubah interfaces 
+
+  **UML GRESIK**
+
+  <img src="Img/soal1-8.png" width="600px">
+
+  **UML SIDOARJO**
+
+  <img src="Img/soal1-9.png" width="600px">
+
+  **UML BANYUWANGI**
+
+  <img src="Img/soal1-10.png" width="600px">
+
+  **UML MADIUN**
+
+  <img src="Img/soal1-11.png" width="600px">
+
 ## Soal 3
+
+**Meminjamkan IP kepaada subnet 1 dengan range IP dari 192.168.0.10 sampai 192.168.0.100 dan 192.168.0.110 sampai 192.168.0.200**
+
+- Lakukan pengaturan ```dhcpd.conf``` pada TUBAN dengan menggunakan perintah ```nano /etc/dhcp/dhcpd.conf```, tambahkan script dibawah ini
+
+  ```
+  subnet 192.168.0.0 netmask 255.255.255.0 {
+    range 192.168.0.10 192.168.0.100;
+    range 192.168.0.110 192.168.0.200;
+    option domain-name-servers 202.46.129.2;
+    default-lease-time 300;
+    max-lease-time 300;
+  }
+  ```
+  <img src="Img/soal3-1.png" width="600px">
+
+- Restart service ```isc-dhcp-server``` menggunakan perintah ```service isc-dhcp-server restart```, lalu cek ip pada klien yang berada di subnet 1 untuk memastikan IP berhasil dipinjamkan
+
+  **UML GRESIK**
+
+  <img src="Img/soal3-2.png" width="600px">
+
+  **UML SIDOARJO**
+
+  <img src="Img/soal3-3.png" width="600px">
 
 ## Soal 4
 
+**Meminjamkan IP kepaada subnet 3 dengan range IP dari 192.168.1.50 sampai 192.168.1.70**
+
+- Lakukan pengaturan ```dhcpd.conf``` pada TUBAN dengan menggunakan perintah ```nano /etc/dhcp/dhcpd.conf```, tambahkan script dibawah ini
+
+  ```
+  subnet 192.168.1.0 netmask 255.255.255.0 {
+    range 192.168.1.50 192.168.1.70;
+    option domain-name-servers 202.46.129.2;
+    default-lease-time 600;
+    max-lease-time 600;
+  }
+  ```
+  <img src="Img/soal4-1.png" width="600px">
+
+- Restart service ```isc-dhcp-server``` menggunakan perintah ```service isc-dhcp-server restart```, lalu cek ip pada klien yang berada di subnet 3 untuk memastikan IP berhasil dipinjamkan
+
+  **UML BANYUWANGI**
+
+  <img src="Img/soal4-2.png" width="600px">
+
+  **UML MADIUN**
+
+  <img src="Img/soal4-3.png" width="600px">
+
 ## Soal 5
 
+**Membuat client menerima DNS Malang dan DNS 202.46.129.2 dari DHCP**
+
+- Lakukan pengaturan ```dhcpd.conf``` pada TUBAN dengan menggunakan perintah ```nano /etc/dhcp/dhcpd.conf```, tambahkan IP MALANG pada option domain-name-servers
+
+  <img src="Img/soal5-1.png" width="600px">
+
+- Lakukan pengecekan pada setiap uml menggunakan perintah ```cat /etc/resolv.conf``` untuk memastikan DNS Malang dan DNS 202.46.129.2 dari DHCP sudah diterima
+
+  **UML GRESIK**
+
+  <img src="Img/soal5-5.png" width="600px">
+
+  **UML SIDOARJO**
+
+  <img src="Img/soal5-4.png" width="600px">
+
+  **UML BANYUWANGI**
+
+  <img src="Img/soal5-3.png" width="600px">
+
+  **UML MADIUN**
+
+  <img src="Img/soal5-2.png" width="600px">
+
 ## Soal 6
+
+**Mengatur waktu peminjaman IP, client di subnet 1 mendapatkan peminjaman alamat IP selama 5 menit, sedangkan client pada subnet 3 mendapatkan peminjaman IP selama 10 menit**
+
+- Lakukan pengaturan ```dhcpd.conf``` pada TUBAN dengan menggunakan perintah ```nano /etc/dhcp/dhcpd.conf```, ubah lease-time pada subnet 1 menjadi 300 dan lease-time pada subnet 3 menjadi 600
+
+  <img src="Img/soal6-1.png" width="600px">
+
+- Lease-time menggunakan satuan waktu detik, oleh karena itu kita mengkonversi menit menjadi detik.
 
 ## Soal 7
 
