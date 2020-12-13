@@ -1,10 +1,10 @@
 # Laporan Resmi Modul 4 
 
-## TOPOLOGI
+**TOPOLOGI**
 
 <img src="Img/CIDR0.png" width="600px">
 
-**VLSM - CISCO**
+## VLSM (Variable Length Subnet Masking) - CPT
 
 - Pembagian subnet
 
@@ -69,13 +69,45 @@
   | **PASURUAN** | 12 | 192.168.0.128 | 255.255.255.128 | 192.168.0.14 |
   | | 9 | 192.168.24.0 | 255.255.248.0 | 192.168.0.14 |
   | | 0 | 0.0.0.0 | 0.0.0.0 | 192.168.0.9 |
-  | **PROBOLINGGO** | 0 0.0.0.0 | 0.0.0.0 | 192.168.0.13 |
-  | **BATU** | 0 0.0.0.0 | 0.0.0.0 | 192.168.0.5 |
+  | **PROBOLINGGO** | 0 | 0.0.0.0 | 0.0.0.0 | 192.168.0.13 |
+  | **BATU** | 0 | 0.0.0.0 | 0.0.0.0 | 192.168.0.5 |
   | | 2 | 192.168.1.0 | 255.255.255.0 | 192.168.0.2 |
   | | 1 | 192.168.16.0 | 255.255.252.0 | 192.168.0.2 |
   | | 5 | 192.168.0.16 | 255.255.255.240 | 192.168.2.3 |
   | | MALANG | 10.151.71.60 | 255.255.255.252 | 192.168.0.2 |
-  | **MADIUN****** | 0 | 0.0.0.0 | 0.0.0.0 | 192.168.2.1 |
+  | **MADIUN** | 0 | 0.0.0.0 | 0.0.0.0 | 192.168.2.1 |
   | **KEDIRI** | 0 | 0.0.0.0 | 0.0.0.0 | 192.168.0.1 |
   | | 1 | 192.168.16.0 | 255.255.252.0 | 192.168.1.3 |
   | **BLITAR** | 0 | 0.0.0.0 | 0.0.0.0 | 192.168.1.1 |
+
+## CIDR (Classless Inter Domain Routing) - UML
+
+- Pembagian subnet
+  
+  **Langkah 1**
+  <img src="Img/CIDR1.png" width="600px">
+
+  **Langkah 2**
+  <img src="Img/CIDR2.png" width="600px">
+
+  **Langkah 3**
+  <img src="Img/CIDR3.png" width="600px">
+
+  **Langkah 4**
+  <img src="Img/CIDR4.png" width="600px">
+
+  **Langkah 5**
+  <img src="Img/CIDR5.png" width="600px">
+
+  **Langkah 6**
+  <img src="Img/CIDR6.png" width="600px">
+
+  **Langkah 7**
+  <img src="Img/CIDR7.png" width="600px">
+
+  **Hasil subnetting**
+  <img src="Img/CIDR8.png" width="600px">
+
+- CIDR Tree
+
+  <img src="Img/CIDR_Tree.png" width="600px">
