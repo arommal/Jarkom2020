@@ -85,27 +85,35 @@
 - Pembagian subnet
   
   **Langkah 1**
+
   <img src="Img/CIDR1.png" width="600px">
 
   **Langkah 2**
+
   <img src="Img/CIDR2.png" width="600px">
 
   **Langkah 3**
+
   <img src="Img/CIDR3.png" width="600px">
 
   **Langkah 4**
+
   <img src="Img/CIDR4.png" width="600px">
 
   **Langkah 5**
+
   <img src="Img/CIDR5.png" width="600px">
 
   **Langkah 6**
+
   <img src="Img/CIDR6.png" width="600px">
 
   **Langkah 7**
+
   <img src="Img/CIDR7.png" width="600px">
 
   **Hasil subnetting**
+  
   <img src="Img/CIDR8.png" width="600px">
 
 - CIDR Tree
