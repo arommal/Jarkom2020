@@ -52,6 +52,7 @@ Subnetting dilakukan menggunakan pendekatan **CIDR**.
 
 <img src="Img/ip.png" width="600px">
 
+\
 DNS Server **MALANG** dan DHCP Server **MOJOKERTO** tidak diikutsertakan dalam Subnetting dan pembagian alamat IP karena sudah mendapatkan IP dari IP DMZ.
 
 |Subnet|Anggota|IP|Netmask
@@ -67,15 +68,171 @@ DNS Server **MALANG** dan DHCP Server **MOJOKERTO** tidak diikutsertakan dalam S
 |A5|Kediri|192.168.1.1|255.255.255.248|
 ||Probolinggo|192.168.1.2|255.255.255.248|
 ||Madiun|192.168.1.3|255.255.255.248|
+|DMZ|Malang|10.151.71.58|255.255.255.248|
+||Mojokerto|10.151.71.59|255.255.255.248|
 
+## Setup Interface
+
+### Router
+
+* **SURABAYA**
+    ```
+    auto lo
+    iface lo inet loopback
+
+    auto eth0
+    iface eth0 inet static
+    address 10.151.70.30
+    netmask 255.255.255.252
+    gateway 10.151.70.29
+
+    #switch0
+    auto eth1
+    iface eth1 inet static
+    address 192.168.2.1
+    netmask 255.255.255.252
+
+    #switch3
+    auto eth2
+    iface eth2 inet static
+    address 192.168.3.1
+    netmask 255.255.255.252
+    ```
+
+* **BATU**
+    ```
+    auto lo
+    iface lo inet loopback
+
+    #switch3
+    auto eth0
+    iface eth0 inet static
+    address 192.168.3.2
+    netmask 255.255.255.252
+    gateway 192.168.3.1
+
+    #switch2
+    auto eth1
+    iface eth1 inet static
+    address 10.151.71.57
+    netmask 255.255.255.248
+
+    #switch5
+    auto eth2
+    iface eth2 inet static
+    address 192.168.2.1
+    netmask 255.255.255.0
+    ```
+
+* **KEDIRI**
+    ```
+    auto lo
+    iface lo inet loopback
+
+    #switch0
+    auto eth0
+    iface eth0 inet static
+    address 192.168.2.2
+    netmask 255.255.255.252
+    gateway 192.168.2.1
+
+    #switch1
+    auto eth1
+    iface eth1 inet static
+    address 192.168.1.1
+    netmask 255.255.255.248
+
+    #switch4
+    auto eth2
+    iface eth2 inet static
+    address 192.168.0.1
+    netmask 255.255.255.0
+    ```
+### Server
+
+* **MALANG**
+    ```
+    auto lo
+    iface lo inet loopback
+
+    #switch2
+    auto eth0
+    iface eth0 inet static
+    address 10.151.71.58
+    netmask 255.255.255.248
+    gateway 10.151.71.57
+    ```
+* **MOJOKERTO**
+    ```
+    auto lo
+    iface lo inet loopback
+
+    #switch2
+    auto eth0
+    iface eth0 inet static
+    address 10.151.71.59
+    netmask 255.255.255.248
+    gateway 10.151.71.57
+    ```
+* **PROBOLINGGO**
+    ```
+    auto lo
+    iface lo inet loopback
+
+    #switch1
+    auto eth0
+    iface eth0 inet static
+    address 192.168.1.2
+    netmask 255.255.255.248
+    gateway 192.168.1.1
+    ```
+* **MADIUN**
+    ```
+    auto lo
+    iface lo inet loopback
+
+    #switch1
+    auto eth0
+    iface eth0 inet static
+    address 192.168.1.3
+    netmask 255.255.255.248
+    gateway 192.168.1.1
+    ```
+
+### Client
+
+* **SIDOARJO**
+    ```
+    auto lo
+    iface lo inet loopback
+
+    #switch5
+    auto eth0
+    iface eth0 inet static
+    address 192.168.2.2
+    netmask 255.255.255.0
+    gateway 192.168.2.1
+    ```
+* **GRESIK**
+    ```
+    auto lo
+    iface lo inet loopback
+
+    #switch4
+    auto eth0
+    iface eth0 inet static
+    address 192.168.0.2
+    netmask 255.255.255.0
+    gateway 192.168.0.1
+    ```
 ## Routing
 
 ##### Routing di SURABAYA
 ```
 ip route add 10.151.71.56/29 via 192.168.3.2    #malang-mojokerto
-ip route add 192.168.2.0/24 via 192.168.3.2 #a1(sidoarjo)
-ip route add 192.168.0.0/24 via 192.168.2.2	#a2(gresik)
-ip route add 192.168.1.0/24 via 192.168.2.2	#a5(madiun-probolinggo)
+ip route add 192.168.2.0/24 via 192.168.3.2     #a1(sidoarjo)
+ip route add 192.168.0.0/24 via 192.168.2.2     #a2(gresik)
+ip route add 192.168.1.0/24 via 192.168.2.2     #a5(madiun-probolinggo)
 ```
 
 ## Setup DHCP Server
