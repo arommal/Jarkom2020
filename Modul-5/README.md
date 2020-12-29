@@ -231,13 +231,55 @@ DNS Server **MALANG** dan DHCP Server **MOJOKERTO** tidak diikutsertakan dalam S
 ```
 ip route add 10.151.71.56/29 via 192.168.3.2    #malang-mojokerto
 ip route add 192.168.2.0/24 via 192.168.3.2     #a1(sidoarjo)
-ip route add 192.168.0.0/24 via 192.168.2.2     #a2(gresik)
-ip route add 192.168.1.0/24 via 192.168.2.2     #a5(madiun-probolinggo)
+ip route add 192.168.0.0/23 via 192.168.2.2     #b2(gresik)
 ```
 
 ## Setup DHCP Server
 
-***
+##### Install isc-dhcp-server di MOJOKERTO
+
+Jalankan `apt-get install isc-dhcp-server` di MOJOKERTO, lalu konfigurasi dhcp server dengan menjalankan perintah `nano /etc/dhcp/dhcpd.conf` dan tambahkan konfigurasi di bawah
+```
+subnet 10.151.71.56 netmask 255.255.255.248 {
+	option routers 10.151.71.56;
+	option broadcast-address 10.151.73.63;
+    }
+
+subnet 192.168.0.0 netmask 255.255.255.0 {
+	range 192.168.0.2 192.168.0.213;
+	option routers 192.168.0.1;
+	option broadcast-address 192.168.0.255;
+	option domain-name-servers 10.151.71.58;
+	option domain-name-servers 202.46.129.2;
+	default-lease-time 600;
+	max-lease-time 7200;
+}
+
+subnet 192.168.2.0 netmask 255.255.255.0 {
+    range 192.168.2.2 192.168.2.203;
+    option routers 192.168.2.1;
+    option broadcast-address 192.168.2.255;
+    option domain-name-servers 10.151.71.58;
+    option domain-name-servers 202.46.129.2;
+    default-lease-time 600;
+    max-lease-time 7200;
+}
+```
+Restart dengan menjalankan perintah `service isc-dhcp-server restart`
+
+##### Install isc-dhcp-relay di BATU, KEDIRI, SURABAYA
+
+Jalankan `apt-get install isc-dhcp-relay`, edit file `nano /etc/default/isc-dhcp-relay` dan masukkan `10.151.71.59` sebagai `SERVERS`. Restart dengan `service isc-dhcp-relay restart`.
+
+##### Ubah Interfaces SIDOARJO dan GRESIK
+
+Lakukan konfigurasi interfaces dengan menjalankan perintah `nano /etc/network/interfaces`, masukkan konfigurasi di bawah
+```
+auto eth0
+iface eth0 inet dhcp
+```
+Restart dengan menjalankan `service networking restart `.
+
 
 ## Soal
 
